@@ -25,6 +25,11 @@ jobs:
           find project -type f \( -name "build.gradle" -o -name "build.gradle.kts" \) -print
           grep -RInE 'compileSdk|targetSdk|targetSdkVersion|compileSdkVersion' project --include='build.gradle' --include='build.gradle.kts' || true
 
+      - name: Update target SDK
+        run: |
+          sed -i 's/targetSdk 32/targetSdk 35/' project/app/build.gradle
+          grep -n 'targetSdk' project/app/build.gradle
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
