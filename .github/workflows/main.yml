@@ -19,19 +19,17 @@ jobs:
       - name: Extract Android project
         run: |
           unzip -q Smart_Billing_Android_Source.zip -d project
-         
-            - name: Check Android SDK versions
-              run: |
+
+      - name: Check Android SDK versions
+        run: |
           find project -type f \( -name "build.gradle" -o -name "build.gradle.kts" \) -print
           grep -RInE 'compileSdk|targetSdk|targetSdkVersion|compileSdkVersion' project --include='build.gradle' --include='build.gradle.kts' || true
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-
-      
-        
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -48,4 +46,3 @@ jobs:
         with:
           name: SmartBilling-APK
           path: project/app/build/outputs/apk/debug/app-debug.apk
-          
