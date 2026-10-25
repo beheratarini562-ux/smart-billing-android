@@ -19,8 +19,9 @@ jobs:
       - name: Extract Android project
         run: |
           unzip -q Smart_Billing_Android_Source.zip -d project
+         
             - name: Check Android SDK versions
-        run: |
+              run: |
           find project -type f \( -name "build.gradle" -o -name "build.gradle.kts" \) -print
           grep -RInE 'compileSdk|targetSdk|targetSdkVersion|compileSdkVersion' project --include='build.gradle' --include='build.gradle.kts' || true
       - name: Set up Java
